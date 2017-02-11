@@ -101,5 +101,15 @@ $reset=$this->DBconnect->prepare('UPDATE uzivatele SET heslo = :heslo WHERE jmen
     } catch (Exception $ex) {
     }   
   }
+    
+    
+    public function odhlaseni (){
+      session_start();
+      session_regenerate_id();
+      unset($_SESSION['jmeno']);
+      header("Location: index.php");
+  }
+    
+    
  }
     
