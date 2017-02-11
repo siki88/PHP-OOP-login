@@ -9,15 +9,33 @@
         <div id="menu">
             <h1>Vítejte</h1>
                       
-<?php      
+include_once 'Databaze.php';
+
     session_start();
     if($_SESSION['jmeno']!=""){
     echo 'JSI VÍTÁN<br>';
     echo ($_SESSION['jmeno']);
+    session_regenerate_id();
     echo '<br>';
     }
-?>              
-          <a href="odhlaseni.php"><button>Odhlásit se </button></a>        
+    
+try {
+   $spojeni = new Databaze();   //připojuji se do třídy
+    if (isset($_POST['odhlaseni'])){ //pokud zmáčknu tlačítko
+        $spojeni->odhlaseni();   //volám odhlášení
+        }
+        
+}catch (Expection $e){
+    echo 'Něco je špatně'.$e->getMessage();
+}
+    
+    
+    
+?>       
+      <form method="POST">     
+       <input type="submit" name="odhlaseni" value="Odhlásit se" />
+      </form> 
         </div>       
     </body>
 </html>
+
